@@ -1,12 +1,20 @@
-﻿using Dalamud.Game.Command;
+﻿using System;
+using System.Collections.Generic;
+using Dalamud.Game.Command;
 using Dalamud.IoC;
 using Dalamud.Plugin;
 using System.IO;
+using System.Net.Http;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
 using Dalamud.Interface.Windowing;
 using Dalamud.Plugin.Services;
-using SamplePlugin.Windows;
+using DutyTime.Windows;
 
-namespace SamplePlugin;
+using Lumina.Excel.Sheets;
+
+namespace DutyTime;
 
 public sealed class Plugin : IDalamudPlugin
 {
@@ -17,19 +25,28 @@ public sealed class Plugin : IDalamudPlugin
     [PluginService] internal static IPlayerState PlayerState { get; private set; } = null!;
     [PluginService] internal static IDataManager DataManager { get; private set; } = null!;
     [PluginService] internal static IPluginLog Log { get; private set; } = null!;
+    [PluginService] private static IChatGui Chat { get; set; } = null!;
 
-    private const string CommandName = "/pmycommand";
+    private const string CommandName = "/dutytime";
 
     public Configuration Configuration { get; init; }
 
-    public readonly WindowSystem WindowSystem = new("SamplePlugin");
+    public readonly WindowSystem WindowSystem = new("DutyTime");
     private ConfigWindow ConfigWindow { get; init; }
     private MainWindow MainWindow { get; init; }
-
-    public Plugin()
+    
+    private readonly IClientState clientState;
+    private string dutyName = "";
+    
+    private static readonly HttpClient Http = new() { Timeout = TimeSpan.FromSeconds(5) };
+    
+    public Plugin(IClientState clientState)
     {
+        this.clientState = clientState;
+        this.clientState.CfPop += OnCfPop;
+        
         Configuration = PluginInterface.GetPluginConfig() as Configuration ?? new Configuration();
-
+        
         // You might normally want to embed resources and load them from the manifest stream
         var goatImagePath = Path.Combine(PluginInterface.AssemblyLocation.Directory?.FullName!, "goat.png");
 
@@ -56,8 +73,40 @@ public sealed class Plugin : IDalamudPlugin
 
         // Add a simple message to the log with level set to information
         // Use /xllog to open the log window in-game
-        // Example Output: 00:57:54.959 | INF | [SamplePlugin] ===A cool log message from Sample Plugin===
+        // Example Output: 00:57:54.959 | INF | [DutyTime] ===A cool log message from Sample Plugin===
         Log.Information($"===A cool log message from {PluginInterface.Manifest.Name}===");
+    }
+
+    public async Task<string?> SendDiscordAsync(string message, string mentionUserIds = "")
+    {
+        if (string.IsNullOrWhiteSpace(Configuration.WebhookUrl))
+        {
+            return "No webhook set";
+        }
+        
+        try
+        {
+            var payload = JsonSerializer.Serialize(new Dictionary<string, object>
+            {
+                ["content"] = message,
+                ["allowedMentions"] = new Dictionary<string, string[]> { ["parse"] = Array.Empty<string>() },
+            });
+
+            Log.Info(payload);
+            using var content = new StringContent(payload, Encoding.UTF8, "application/json");
+            using var resp = await Http.PostAsync(Configuration.WebhookUrl, content);
+
+            if (!resp.IsSuccessStatusCode)
+            {
+                return $"Discord returned {(int)resp.StatusCode}.";
+            } 
+            return null;
+        }
+        catch (Exception e)
+        { 
+            Log.Error(e, "Webhook failed");
+            return "Request failed, see /xllog";
+        }
     }
 
     public void Dispose()
@@ -71,6 +120,7 @@ public sealed class Plugin : IDalamudPlugin
 
         ConfigWindow.Dispose();
         MainWindow.Dispose();
+        clientState.CfPop -= OnCfPop;
 
         CommandManager.RemoveHandler(CommandName);
     }
@@ -78,7 +128,42 @@ public sealed class Plugin : IDalamudPlugin
     private void OnCommand(string command, string args)
     {
         // In response to the slash command, toggle the display status of our main ui
-        MainWindow.Toggle();
+        if (args == "config")
+        {
+            ConfigWindow.Toggle();    
+        }
+        else
+        {
+            MainWindow.Toggle();
+        }
+    }
+
+    private void OnCfPop(ContentFinderCondition duty)
+    {
+        // why is the first letter not capitalized? who decided that
+        dutyName = duty.Name.ToString();
+        char firstLetter = dutyName[0];
+        firstLetter = char.ToUpper(firstLetter);
+        dutyName = firstLetter + dutyName.Remove(0, 1);
+
+        if (Configuration.NotifyInDiscord)
+        {
+            var mention = $"<@{Configuration.DiscordUserId}>";
+            var message = $"{mention}, {dutyName} is ready!";
+            _ = Task.Run(() => SendDiscordAsync(message));
+        }
+        else
+        {
+            if (Configuration.NoPingWarning){
+                Notify($"{dutyName} is ready, however pings are disabled. You can this warning in \"/dutytime\" under \"Warn when pings is disabled\".");
+            }
+        }
+        
+    }
+    
+    private static void Notify(string message)
+    {
+        Chat.Print(message);
     }
     
     public void ToggleConfigUi() => ConfigWindow.Toggle();
