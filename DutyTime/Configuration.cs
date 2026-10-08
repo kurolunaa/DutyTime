@@ -8,11 +8,6 @@ namespace DutyTime;
 public class Configuration : IPluginConfiguration
 {
     public int Version { get; set; } = 0;
-
-    // public bool IsConfigWindowMovable { get; set; } = true;
-    // public bool SomePropertyToBeSavedAndWithADefault { get; set; } = true;
-    
-    // setup discord webhook settings for config
     public bool NotifyInDiscord { get; set; } = true;
     public bool NoPingWarning { get; set; } = true;
     public string WebhookUrl { get; set; } = "";

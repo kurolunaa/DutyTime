@@ -46,19 +46,16 @@ public sealed class Plugin : IDalamudPlugin
         this.clientState.CfPop += OnCfPop;
         
         Configuration = PluginInterface.GetPluginConfig() as Configuration ?? new Configuration();
-        
-        // You might normally want to embed resources and load them from the manifest stream
-        var goatImagePath = Path.Combine(PluginInterface.AssemblyLocation.Directory?.FullName!, "goat.png");
 
         ConfigWindow = new ConfigWindow(this);
-        MainWindow = new MainWindow(this, goatImagePath);
+        MainWindow = new MainWindow(this);
 
         WindowSystem.AddWindow(ConfigWindow);
         WindowSystem.AddWindow(MainWindow);
 
         CommandManager.AddHandler(CommandName, new CommandInfo(OnCommand)
         {
-            HelpMessage = "A useful message to display in /xlhelp"
+            HelpMessage = "The default MainWindow that came with the SampleProject\n/dutytime config -> Opens the DutyTime settings"
         });
 
         // Tell the UI system that we want our windows to be drawn through the window system

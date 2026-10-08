@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ec29aab5-fe74-4f5d-96d6-6a9c6b3e2023" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/DutyTime.slnx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DutyTime/DutyTime.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DutyTime/DutyTime.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SamplePlugin.slnx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SamplePlugin/Configuration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DutyTime/Configuration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SamplePlugin/Plugin.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DutyTime/Plugin.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SamplePlugin/SamplePlugin.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SamplePlugin/Windows/ConfigWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DutyTime/Windows/ConfigWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SamplePlugin/Windows/MainWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DutyTime/Windows/MainWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SamplePlugin/packages.lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/DutyTime/packages.lock.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;kurolunaa&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/kurolunaa/DutyTime.git&quot;,
+    &quot;accountId&quot;: &quot;57570d35-00ac-49bd-89d5-0ab72bdbf31b&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/SamplePlugin/bin/Debug/SamplePlugin.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/SamplePlugin/packages.lock.json" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="Toolset" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="3K31HOUArV3WjIe2N0Ed7VaacnG" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ec29aab5-fe74-4f5d-96d6-6a9c6b3e2023" name="Changes" comment="" />
+      <created>1790771348911</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1790771348911</updated>
+      <workItem from="1790771350188" duration="1608000" />
+      <workItem from="1790773236964" duration="47000" />
+      <workItem from="1790773415196" duration="47000" />
+      <workItem from="1790773556002" duration="1964000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="dotnet:Serilog" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.OperationCanceledException" breakIfHandledByOtherCode="false" displayValue="System.OperationCanceledException" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.Threading.Tasks.TaskCanceledException" breakIfHandledByOtherCode="false" displayValue="System.Threading.Tasks.TaskCanceledException" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
